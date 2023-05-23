@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+}
+
+.input {
+    max-width: 377px;
+}
+
+.circleContainer {
+    list-style-type: none;
+    padding-inline-start: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 80px;
+    gap: 16px;
+}
