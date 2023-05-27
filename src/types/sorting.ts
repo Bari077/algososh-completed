@@ -1,7 +1,7 @@
 import { ElementStates } from "./element-states";
 
 export type TChar = {
-    item: string;
+    item: string | number;
     id: number;
     state?: ElementStates
   }

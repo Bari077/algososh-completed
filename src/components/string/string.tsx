@@ -7,7 +7,7 @@ import { Circle } from "../ui/circle/circle";
 import { ElementStates } from "../../types/element-states";
 import { TChar } from "../../types/sorting";
 import { delayedPromise, changeElementsState, swap } from "../../utils/utils";
-import { SHORT_DELAY_IN_MS, DELAY_IN_MS } from "../../constants/delays";
+import { DELAY_IN_MS } from "../../constants/delays";
 
 
 export const StringComponent: React.FC = () => {
