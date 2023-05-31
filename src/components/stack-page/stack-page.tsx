@@ -13,11 +13,19 @@ import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 export const StackPage: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [stackElements, setStackElements] = useState<TChar[]>([]);
+  const [isLoader, setIsLoader] = useState({
+    add: false,
+    delete: false
+  });
   const stack = useMemo(()=> new Stack<TChar>(),[]);
   const stackArray = stack.getStack();
   const stackTop = stack.peak();    
 
-  const handleAddInStack = async(inputValue: string)=> {    
+  const handleAddInStack = async(inputValue: string)=> {
+    setIsLoader({
+      add: true,
+      delete: false
+    });    
     const element: TChar = {
       item: inputValue,
       id: stack.getSize(),
@@ -28,15 +36,27 @@ export const StackPage: React.FC = () => {
     setStackElements([...stackArray]);
     await delayedPromise(SHORT_DELAY_IN_MS);
     changeElementsState([element], ElementStates.Default);
-    setStackElements([...stackArray]);    
+    setStackElements([...stackArray]);
+    setIsLoader({
+      add: false,
+      delete: false
+    });    
   }
 
-  const handleDeleteFromStack = async()=> {    
+  const handleDeleteFromStack = async()=> {
+    setIsLoader({
+      add: false,
+      delete: true
+    });    
     changeElementsState([stack.peak()], ElementStates.Changing);
     setStackElements([...stackArray]);
     await delayedPromise(SHORT_DELAY_IN_MS);    
     stack.pop();        
     setStackElements([...stackArray]);
+    setIsLoader({
+      add: false,
+      delete: false
+    });
   }
 
   const resetStack =()=> {
@@ -49,18 +69,19 @@ export const StackPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Стек">
-      <form className={style.form} onReset={resetStack}>
+      <form className={style.form} onReset={resetStack} onSubmit={evt => evt.preventDefault()}>
         <div className={style.stackControl}>
-          <Input value={inputValue} 
+          <Input value={inputValue}  
           onChange={evt=> setInputValue(evt.currentTarget.value)} 
           type = "text" isLimitText = {true} maxLength = {4}
           extraClass={style.input}></Input>
           <Button type="button" 
           onClick={()=> handleAddInStack(inputValue)}
-           text="Добавить" 
+           text="Добавить" isLoader={isLoader.add}
            disabled={!regexTab.test(inputValue)}></Button>
           <Button type="button" onClick={handleDeleteFromStack} 
-          text="Удалить" disabled={!stackArray.length ? true : false}></Button>
+          text="Удалить" isLoader={isLoader.delete}
+          disabled={!stackArray.length ? true : false}></Button>
         </div>
         <Button type="reset" text="Очистить"
          disabled={!stackArray.length ? true : false}></Button>

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
@@ -8,7 +8,7 @@ import style from "./list-page.module.css";
 import { LinkedList, INode } from "./utils";
 import { TChar } from "../../types/sorting";
 import { ElementStates } from "../../types/element-states";
-import { delayedPromise, changeElementsState } from "../../utils/utils";
+import { delayedPromise, changeElementsState, randArr } from "../../utils/utils";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { ActionStates } from "../../types/list-action-states";
 
@@ -23,6 +23,23 @@ export const ListPage: React.FC = () => {
   const [listElements, setListElements] = useState<TChar[]>([]);
   const nodeList = useMemo(() => new LinkedList<string>(), []);
 
+  const initialItems: Array<string> = ['Y','A','N','D','E','X'];
+
+  useEffect(()=> {
+    initialItems.forEach(item => {
+      nodeList.append(item);
+      const element = {
+        item: item,
+        head: nodeList.getSize() === 1 ?
+        'head' : undefined,
+        tail: nodeList.getSize() === initialItems.length ?
+        'tail' : undefined,
+        state: ElementStates.Default,        
+      }
+      listElements.push(element);
+      setListElements([...listElements]);
+    });
+  },[])
 
   const addFirst =async(value: string)=> {    
     const newChar = (
