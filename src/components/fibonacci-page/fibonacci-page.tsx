@@ -5,6 +5,7 @@ import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { delayedPromise } from "../../utils/utils";
+import { fiboMaxNumber } from "../../constants/algorithm-settings";
 import { DELAY_IN_MS } from "../../constants/delays";
 
 export const FibonacciPage: React.FC = () => {
@@ -34,15 +35,19 @@ export const FibonacciPage: React.FC = () => {
     setIsLoading(false)
   }
 
-  const flexCircleContainerStyle = fibonacciElements.length > 10 ? `${style.circleContainer_flexStart}` : '';
+  const flexCircleContainerStyle = fibonacciElements.length > 10 ? 
+  `${style.circleContainer_flexStart}` : '';
 
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
       <form onSubmit={handleSubmit}>
         <div className={style.container}>
-          <Input value = {value} onChange={evt=> setValue(evt.currentTarget.value)} type = "number" isLimitText = {true} max = {19} extraClass={style.input}></Input>
+          <Input value = {value} 
+          onChange={evt=> setValue(evt.currentTarget.value)} 
+          type = "number" isLimitText = {true} max = {fiboMaxNumber} 
+          extraClass={style.input}></Input>
           <Button text='Рассчитать' type="submit" isLoader={isLoading}
-           disabled={ Number(value) > 0 && Number(value) < 20 && Number.isInteger(Number(value)) ? false : true}></Button>
+           disabled={ Number(value) > 0 && Number(value) < (fiboMaxNumber - 1) && Number.isInteger(Number(value)) ? false : true}></Button>
         </div>        
       </form>
       <ul className={`${style.circleContainer} ${flexCircleContainerStyle}`}>

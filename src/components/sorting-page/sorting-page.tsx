@@ -9,6 +9,7 @@ import { changeElementsState, swap, delayedPromise } from "../../utils/utils";
 import { randArr } from "../../utils/utils";
 import { ElementStates } from "../../types/element-states";
 import { TChar } from "../../types/sorting";
+import { sortSettings } from "../../constants/algorithm-settings";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 export const SortingPage: React.FC = () => {
@@ -16,7 +17,8 @@ export const SortingPage: React.FC = () => {
   const [sortedElements, setSortedElements] = useState<TChar[]>([]);
   const [isLoader, setIsloader] = useState({
     state: false,
-    direction: ''});
+    direction: ''
+  });
 
   const getInitialArrayValue =(arr: number[])=> {
     const initialValue = arr.map((item, index) => ({
@@ -27,7 +29,9 @@ export const SortingPage: React.FC = () => {
     return initialValue
   }
 
-  const initialValue = getInitialArrayValue(randArr(3,19,0,100));
+  const initialValue = getInitialArrayValue(randArr(
+  sortSettings.minQtyElements, sortSettings.maxQtyElements, 
+  sortSettings.minValue, sortSettings.maxValue));
 
   useEffect(()=> {
     setSortedElements(initialValue)
@@ -75,17 +79,17 @@ export const SortingPage: React.FC = () => {
         switch(direction) {
           case "descending" :
             if (arr[j].item < arr[j + 1].item) { 
-              swap(arr, j, (j + 1));
+              swap(arr, (j + 1), j);
             }
             break;
           case "ascending" :
             if (arr[j].item > arr[j + 1].item) { 
-              swap(arr, j, (j + 1));
+              swap(arr, (j + 1), j);
             }
             break;
         }         
         
-        changeElementsState([arr[j], arr[j+1]], ElementStates.Changing);
+        changeElementsState([arr[j+1], arr[j]], ElementStates.Changing);
         state([...arr]);
         await delayedPromise(SHORT_DELAY_IN_MS);
         changeElementsState([arr[j]], ElementStates.Default);
@@ -124,7 +128,7 @@ export const SortingPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Сортировка массива">
-      <div className={style.filtersContainer}>
+      <form className={style.filtersContainer}>
         <div className={style.radioFilters}>
           <RadioInput value="selection" checked={mode === "selection"} label="Выбор"
            onChange={event=> setMode((event.target as HTMLInputElement).value)}
@@ -146,7 +150,7 @@ export const SortingPage: React.FC = () => {
         <Button type="button" text="Новый массив" 
         extraClass={style.button} onClick={handleRandArray}
         disabled={isLoader.state}></Button>
-      </div>
+      </form>
       <div className={style.columnContainer}>
         {sortedElements.length > 0 && 
         sortedElements.map((item)=> 

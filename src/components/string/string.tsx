@@ -1,4 +1,4 @@
-import React, { FormEventHandler, useState, ChangeEvent, useEffect } from "react";
+import React, { FormEventHandler, useState, ChangeEvent } from "react";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import style from './string.module.css';
 import { Input } from "../ui/input/input";
@@ -8,6 +8,7 @@ import { ElementStates } from "../../types/element-states";
 import { TChar } from "../../types/sorting";
 import { delayedPromise, changeElementsState, swap } from "../../utils/utils";
 import { DELAY_IN_MS } from "../../constants/delays";
+import { stringMaxChar } from "../../constants/algorithm-settings";
 
 
 export const StringComponent: React.FC = () => {
@@ -53,7 +54,7 @@ export const StringComponent: React.FC = () => {
     <SolutionLayout title="Строка">
       <form onSubmit={handleSubmit} >
         <div className={style.container}>
-          <Input value={value} onChange={handleChange} type = "text" isLimitText = {true} maxLength = {11} extraClass={style.input}></Input>
+          <Input value={value} onChange={handleChange} type = "text" isLimitText = {true} maxLength = {stringMaxChar} extraClass={style.input}></Input>
           <Button text='Развернуть' type="submit" isLoader={isLoading}
            disabled={value.length === 0 ? true : false}></Button>
         </div>        
