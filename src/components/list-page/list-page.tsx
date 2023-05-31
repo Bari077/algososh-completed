@@ -189,6 +189,7 @@ export const ListPage: React.FC = () => {
 
 
   const handleAddInHead = async(value: string)=> {
+    setInputValue('');
     setIsLoader({
       state: true,
       action: ActionStates.AddInHead
@@ -204,6 +205,7 @@ export const ListPage: React.FC = () => {
   }
 
   const handleAddInTail = async(value: string)=> {
+    setInputValue('');
     setIsLoader({
       state: true,
       action: ActionStates.AddInTail
@@ -216,6 +218,8 @@ export const ListPage: React.FC = () => {
   }
 
   const handleAddByIndex = async(value: string, index: number) => {
+    setInputValue('');
+    setIndexValue('');
     setIsLoader({
       state: true,
       action: ActionStates.AddByIndex
@@ -253,6 +257,7 @@ export const ListPage: React.FC = () => {
   }
 
   const handleDeleteByIndex = async (index: number)=> {
+    setIndexValue('');
     setIsLoader({
       state: true,
       action: ActionStates.DeleteByIndex
