@@ -21,9 +21,10 @@ export const ListPage: React.FC = () => {
   const [value, setInputValue] = useState('');
   const [indexValue, setIndexValue] =useState('');
   const [listElements, setListElements] = useState<TChar[]>([]);
-  const nodeList = useMemo(() => new LinkedList<string>(), []);
+  const nodeList = useMemo(() => new LinkedList<string | number>(), []);
 
-  const initialItems: Array<string> = ['Y','A','N','D','E','X'];
+  const initialItems: Array<number> = randArr(1,6,0,9999)
+  
 
   useEffect(()=> {
     initialItems.forEach(item => {
