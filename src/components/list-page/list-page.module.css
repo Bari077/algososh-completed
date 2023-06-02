@@ -1,0 +1,41 @@
+.form {
+    margin: 0 auto;
+    width: 952px;
+    display: grid;
+    grid-template-columns: 204px repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 12px;
+    row-gap: 12px;
+}
+
+.button_wide {    
+    grid-column-end: span 2;
+}
+
+.circleContainer {
+    margin: 0 auto;
+    list-style-type: none;
+    width: 952px;
+    padding-inline-start: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 120px;
+    gap: 16px;
+}
+
+.listItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.tailCaption {
+    position: relative;
+    top: 14px;
+}
+
+.tailElement {
+    height: 56px;
+}
+
