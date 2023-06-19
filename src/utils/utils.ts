@@ -28,3 +28,10 @@ export const randArr =(minQtyElements: number, maxQtyElements: number,
   }
   return arr
 }
+
+
+export const hasArrayOtherStateElement =(array: TChar[], state: ElementStates)=> {
+  return array.some(element => {
+      return element.state !== state 
+  })
+}
