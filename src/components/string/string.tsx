@@ -31,7 +31,7 @@ export const StringComponent: React.FC = () => {
   
   return (
     <SolutionLayout title="Строка">
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit} data-cy="recursion">
         <div className={style.container}>
           <Input value={value} onChange={handleChange} type = "text" isLimitText = {true} maxLength = {stringMaxChar} extraClass={style.input}></Input>
           <Button text='Развернуть' type="submit" isLoader={isLoading}

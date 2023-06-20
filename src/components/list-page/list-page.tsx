@@ -293,7 +293,7 @@ export const ListPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Связный список">
-      <form className={style.form}>
+      <form className={style.form} data-cy="list">
         <Input value={value} 
         onChange={evt=> setInputValue(evt.currentTarget.value)}
         isLimitText = {true} maxLength = {4} 

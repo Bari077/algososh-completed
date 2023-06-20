@@ -82,7 +82,7 @@ export const QueuePage: React.FC = () => {
 
   return (
     <SolutionLayout title="Очередь">
-      <form className={style.form} onReset={resetQueue} onSubmit={evt => evt.preventDefault()}>
+      <form data-cy="queue" className={style.form} onReset={resetQueue} onSubmit={evt => evt.preventDefault()}>
         <div className={style.queueControl}>
           <Input value={inputValue} 
           onChange={evt=> setInputValue(evt.currentTarget.value)} 

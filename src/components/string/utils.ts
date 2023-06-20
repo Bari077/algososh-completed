@@ -15,7 +15,8 @@ export const  getStringArrayWithOptions =(value: string): TChar[]=>
 export const reverse = async(stringArray: TChar[], state: React.Dispatch<React.SetStateAction<TChar[]>>) => {
     let start = 0;
     let end = stringArray.length-1;
-    while(start <= end) {            
+    while(start <= end) {
+      await delayedPromise(DELAY_IN_MS);            
       changeElementsState([stringArray[start], stringArray[end]], ElementStates.Changing);
       state([...stringArray]);
       await delayedPromise(DELAY_IN_MS);    

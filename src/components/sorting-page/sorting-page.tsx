@@ -53,7 +53,7 @@ export const SortingPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Сортировка массива">
-      <form className={style.filtersContainer}>
+      <form className={style.filtersContainer} data-cy="sorting">
         <div className={style.radioFilters}>
           <RadioInput value="selection" checked={mode === "selection"} label="Выбор"
            onChange={event=> setMode((event.target as HTMLInputElement).value)}
