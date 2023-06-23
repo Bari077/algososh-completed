@@ -295,16 +295,19 @@ export const ListPage: React.FC = () => {
     <SolutionLayout title="Связный список">
       <form className={style.form} data-cy="list">
         <Input value={value} 
+        data-cy="valueInput" 
         onChange={evt=> setInputValue(evt.currentTarget.value)}
         isLimitText = {true} maxLength = {4} 
         placeholder = "Введите значение"
         ></Input>
         <Button text="Добавить в head" 
+        data-cy="addInHead" 
         onClick={()=>handleAddInHead(value)}
         isLoader={isLoader.action === ActionStates.AddInHead ? 
         isLoader.state : false} 
         disabled={isLoader.state || !regexTab.test(value)}></Button>
         <Button text="Добавить в tail" 
+        data-cy="addInTail" 
         onClick={()=> handleAddInTail(value)} 
         isLoader={isLoader.action === ActionStates.AddInTail ? 
         isLoader.state : false}
@@ -320,11 +323,13 @@ export const ListPage: React.FC = () => {
         isLoader={isLoader.action === ActionStates.DeleteFromTail ? 
         isLoader.state : false} 
         disabled={isLoader.state || nodeList.getSize() === 0}></Button>
-        <Input value={indexValue}
+        <Input value={indexValue} 
+        data-cy="indexInput"
         onChange={evt=> setIndexValue(evt.currentTarget.value)} 
         placeholder = "Введите индекс" type = "number"></Input>
         <Button extraClass={style.button_wide} 
         text="Добавить по индексу" 
+        data-cy="addByIndex" 
         onClick={()=> handleAddByIndex(value, Number(indexValue))} 
         isLoader={isLoader.action === ActionStates.AddByIndex ? 
         isLoader.state : false} 
@@ -332,7 +337,8 @@ export const ListPage: React.FC = () => {
         Number(indexValue) < 0 || Number(indexValue) > listElements.length-1 ||
         !regexTab.test(indexValue)}></Button>
         <Button extraClass={style.button_wide} 
-        text="Удалить по индексу"
+        text="Удалить по индексу" 
+        data-cy="deleteByIndex"
         onClick={()=> handleDeleteByIndex(Number(indexValue))} 
         isLoader={isLoader.action === ActionStates.DeleteByIndex ? 
         isLoader.state : false} 
