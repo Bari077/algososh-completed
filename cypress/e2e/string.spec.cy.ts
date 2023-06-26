@@ -1,20 +1,21 @@
 import { CircleCSS } from "../../src/types/testing";
+import { submitButton, circleElement } from "../../src/constants/cypress";
 
 describe('String page', () => {
   beforeEach(()=> {
-    cy.visit(Cypress.config().baseUrl + '/recursion');
+    cy.visit('/recursion');
   });
 
   it('should disable button "Развернуть" if input empty', ()=> {
     cy.get('input').should('have.value', '');
-    cy.get('button[type*=submit]').should('be.disabled');
+    cy.get(submitButton).should('be.disabled');
   });
 
   it('should correctly reverse string', ()=> {
     cy.get('input').type('01234');
-    cy.get('button[type*=submit]').click();
+    cy.get(submitButton).click();
 
-    cy.get('[data-cy*=circle]').as('circle');
+    cy.get(circleElement).as('circle');
 
     cy.get('@circle')
       .should('have.length',5)

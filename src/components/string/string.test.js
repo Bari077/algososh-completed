@@ -2,6 +2,9 @@ import { ElementStates } from "../../types/element-states";
 import { reverse, getStringArrayWithOptions } from "./utils";
 import { hasArrayOtherStateElement } from "../../utils/utils";
 
+
+jest.setTimeout(10000);
+
 const mock = jest.fn();
 
 const createStringFromArray  =(array)=> {

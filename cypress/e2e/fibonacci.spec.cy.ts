@@ -1,20 +1,20 @@
-
+import { submitButton, circleElement } from '../../src/constants/cypress';
 
 describe('Fibonacci page', () => {
   beforeEach(()=> {
-    cy.visit(Cypress.config().baseUrl + '/fibonacci');
+    cy.visit('/fibonacci');
   });
 
   it('should disable button "Рассчитать" if input empty', ()=> {
     cy.get('input').should('have.value', '');
-    cy.get('button[type*=submit]').should('be.disabled');
+    cy.get(submitButton).should('be.disabled');
   });
 
   it('should correctly generate numbers', ()=> {
     cy.get('input').type('6');
-    cy.get('button[type*=submit]').click();
+    cy.get(submitButton).click();
 
-    cy.get('[data-cy*=circle]').as('circle');
+    cy.get(circleElement).as('circle');
 
 
     cy.get('@circle').should('have.length', 1);

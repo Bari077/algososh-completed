@@ -3,7 +3,7 @@ const routes = ["recursion", "fibonacci", "sorting", "stack", "queue", "list"];
 
 describe('App works correctly with routes', () => {
   before(()=> {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit('/');
   });
   
   it('should open correct route', () => {
@@ -11,7 +11,7 @@ describe('App works correctly with routes', () => {
       cy.get(`a[href*=${route}]`).click();
       cy.get(`[data-cy=${route}]`).should('exist');
       cy.get('button').contains('К оглавлению').click();
-      cy.url().should('eq', Cypress.config().baseUrl+'/')
+      cy.url().should('eq', Cypress.config().baseUrl+'/');
     })    
   });
 })
