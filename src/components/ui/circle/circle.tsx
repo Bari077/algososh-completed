@@ -23,8 +23,9 @@ export const Circle: React.FC<CircleProps> = ({
   isSmall,
 }) => {
   return (
-    <div className={`${styles.content} ${extraClass}`}>
+    <div className={`${styles.content} ${extraClass}`} data-cy="c-card">
       <div
+        data-cy="c-head"
         className={`text text_type_input text_color_input mb-4 ${
           styles.absolute
         } ${styles.head} ${
@@ -34,6 +35,7 @@ export const Circle: React.FC<CircleProps> = ({
         {head}
       </div>
       <div
+        data-cy="circle"
         className={`${styles.circle}  ${isSmall ? styles.small : ""} ${
           styles[state]
         }`}
@@ -50,6 +52,7 @@ export const Circle: React.FC<CircleProps> = ({
         {index?.toString()}
       </p>
       <div
+        data-cy="c-tail"
         className={`text text_type_input text_color_input mt-4 ${
           styles.absolute
         } ${index?.toString() ? styles.tail60 : styles.tail30} ${

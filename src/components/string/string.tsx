@@ -4,34 +4,17 @@ import style from './string.module.css';
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
-import { ElementStates } from "../../types/element-states";
 import { TChar } from "../../types/sorting";
-import { delayedPromise, changeElementsState, swap } from "../../utils/utils";
-import { DELAY_IN_MS } from "../../constants/delays";
 import { stringMaxChar } from "../../constants/algorithm-settings";
+import { reverse, getStringArrayWithOptions } from "./utils";
 
 
 export const StringComponent: React.FC = () => {
   const [value, setValue] = useState('')
   const [reverseElements, setReverseElements] = useState<TChar[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); 
 
   
-
-  const reverse = async(stringArray: TChar[], state: React.Dispatch<React.SetStateAction<TChar[]>>)=> {
-    let start = 0;
-    let end = stringArray.length-1;
-    while(start <= end) {            
-      changeElementsState([stringArray[start], stringArray[end]], ElementStates.Changing);
-      state([...stringArray]);
-      await delayedPromise(DELAY_IN_MS);    
-      swap(stringArray, start, end);
-      changeElementsState([stringArray[start], stringArray[end]], ElementStates.Modified);
-      state([...stringArray]);
-      start ++ ;
-      end --;
-    }
-  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>)=> {
     setValue(e.target.value);
@@ -40,11 +23,7 @@ export const StringComponent: React.FC = () => {
   const handleSubmit: FormEventHandler<HTMLFormElement> =async(evt)=> {
     evt.preventDefault();
     setIsLoading(true);
-    const initialValue = value.split('').map((item, index) =>({
-      item,
-      id: index,
-      state: ElementStates.Default
-    }));
+    const initialValue = getStringArrayWithOptions(value);
     setReverseElements(initialValue);
     await reverse(initialValue, setReverseElements);
     setIsLoading(false)   
@@ -52,7 +31,7 @@ export const StringComponent: React.FC = () => {
   
   return (
     <SolutionLayout title="Строка">
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit} data-cy="recursion">
         <div className={style.container}>
           <Input value={value} onChange={handleChange} type = "text" isLimitText = {true} maxLength = {stringMaxChar} extraClass={style.input}></Input>
           <Button text='Развернуть' type="submit" isLoader={isLoading}

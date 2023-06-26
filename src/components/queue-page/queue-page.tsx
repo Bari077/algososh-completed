@@ -82,7 +82,7 @@ export const QueuePage: React.FC = () => {
 
   return (
     <SolutionLayout title="Очередь">
-      <form className={style.form} onReset={resetQueue} onSubmit={evt => evt.preventDefault()}>
+      <form data-cy="queue" className={style.form} onReset={resetQueue} onSubmit={evt => evt.preventDefault()}>
         <div className={style.queueControl}>
           <Input value={inputValue} 
           onChange={evt=> setInputValue(evt.currentTarget.value)} 
@@ -91,10 +91,10 @@ export const QueuePage: React.FC = () => {
           <Button type="button" onClick={()=> handleEnqueue(inputValue)} 
           disabled={queue.getTailIndex() === queueLength - 1 || 
           !regexTab.test(inputValue)} isLoader={isLoader.enqueue}
-          text="Добавить" ></Button>
+          text="Добавить" data-cy="addButton"></Button>
           <Button type="button" onClick={handleDequeue}
           disabled={queue.isEmpty()}  isLoader={isLoader.dequeue}
-          text="Удалить" ></Button>
+          text="Удалить" data-cy="deleteButton"></Button>
         </div>
         <Button type="reset" text="Очистить" 
         disabled={queue.isEmpty() && queue.getHeadIndex() === 0}></Button>

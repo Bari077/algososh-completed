@@ -69,19 +69,20 @@ export const StackPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Стек">
-      <form className={style.form} onReset={resetStack} onSubmit={evt => evt.preventDefault()}>
+      <form data-cy="stack" className={style.form} onReset={resetStack} onSubmit={evt => evt.preventDefault()}>
         <div className={style.stackControl}>
           <Input value={inputValue}  
           onChange={evt=> setInputValue(evt.currentTarget.value)} 
           type = "text" isLimitText = {true} maxLength = {4}
           extraClass={style.input}></Input>
-          <Button type="button" 
+          <Button type="button" data-cy="addButton"
           onClick={()=> handleAddInStack(inputValue)}
            text="Добавить" isLoader={isLoader.add}
            disabled={!regexTab.test(inputValue)}></Button>
           <Button type="button" onClick={handleDeleteFromStack} 
           text="Удалить" isLoader={isLoader.delete}
-          disabled={!stackArray.length ? true : false}></Button>
+          disabled={!stackArray.length ? true : false} 
+          data-cy="deleteButton"></Button>
         </div>
         <Button type="reset" text="Очистить"
          disabled={!stackArray.length ? true : false}></Button>
